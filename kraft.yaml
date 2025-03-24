@@ -1,4 +1,4 @@
-specification: '0.5'
+specification: '0.6'
 name: wamr
 unikraft:
   version: stable
@@ -67,7 +67,8 @@ targets:
         - CONFIG_LIBVFSCORE_ROOTFS="initrd"
 libraries:
   wamr:
-    version: stable
+    source: https://github.com/dblnz/lib-wamr.git
+    version: dev
     kconfig:
       - CONFIG_LIBWAMR_MAIN_FUNCTION=y
   lwip: 
