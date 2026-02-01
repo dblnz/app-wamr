@@ -22,19 +22,19 @@ This will guide you through an interactive build process where you can select on
 Otherwise, we recommend building for `qemu/x86_64` like so:
 
 ```console
-kraft build --target wamr-qemu-x86_64-initrd
+kraft build --target qemu/x86_64
 ```
 
 Once built, you can instantiate the unikernel via:
 
 ```console
-kraft run --target wamr-qemu-x86_64-initrd --initrd ./
+kraft run --target qemu/x86_64
 ```
 
 If you don't have KVM support (such as when running inside a virtual machine), pass the `-W` option to `kraft run` to disable virtualization support:
 
 ```console
-kraft run -W --target wamr-qemu-x86_64-initrd --initrd ./
+kraft run -W --target qemu/x86_64
 ```
 
 When left without the `--target` argument, you'll be queried for the desired target from the list.
