@@ -1,0 +1,67 @@
+spec: v0.6
+
+name: app-wamr
+
+rootfs: ./rootfs
+
+cmd: ["/main.wasm"]
+
+# Customize your filesystem with a bidirectional link between your host
+# and the unikernel by uncomment the `volumes` element below:
+#
+#volumes:
+# - ./rootfs/:/vol
+
+unikraft:
+  version: staging
+  kconfig:
+    CONFIG_LIBDEVFS_AUTOMOUNT: 'y'
+    CONFIG_LIBDEVFS_DEV_NULL: 'y'
+    CONFIG_LIBDEVFS_DEV_STDOUT: 'y'
+    CONFIG_LIBDEVFS_DEV_ZERO: 'y'
+    CONFIG_LIBDEVFS: 'y'
+    CONFIG_LIBPOSIX_LIBDL: 'y'
+    CONFIG_LIBPOSIX_PROCESS: 'y'
+    CONFIG_LIBPOSIX_USER: 'y'
+    CONFIG_LIBRAMFS: 'y'
+    CONFIG_LIBUK9P: 'y'
+    CONFIG_LIBUKBUS: 'y'
+    CONFIG_LIBUKCPIO: 'y'
+    CONFIG_LIBUKDEBUG_ANSI_COLOR: 'y'
+    CONFIG_LIBUKLIBPARAM: 'y'
+    CONFIG_LIBUKMMAP: 'y'
+    CONFIG_LIBUKSCHEDCOOP: 'y'
+    CONFIG_LIBUKSIGNAL: 'y'
+    CONFIG_LIBUKTIME: 'y'
+    CONFIG_LIBVFSCORE_AUTOMOUNT_CI_EINITRD: 'y'
+    CONFIG_LIBVFSCORE_AUTOMOUNT_CI: 'y'
+    CONFIG_LIBVFSCORE_AUTOMOUNT_FB: 'y'
+    CONFIG_LIBVFSCORE_AUTOMOUNT_FB0_DEV: "embedded"
+    CONFIG_LIBVFSCORE_AUTOMOUNT_FB0_DRIVER: "extract"
+    CONFIG_LIBVFSCORE_AUTOMOUNT_FB0_MP: "/"
+    CONFIG_LIBVFSCORE_AUTOMOUNT_UP: 'y'
+    CONFIG_LIBVFSCORE_AUTOMOUNT: 'y'
+    CONFIG_LIBVFSCORE: 'y'
+    CONFIG_LIBUK9P: 'y'
+    CONFIG_UKSYSINFO: 'y'
+    CONFIG_VIRTIO_PCI: 'y'
+    CONFIG_LIBUKNETDEV_EINFO_LIBPARAM: 'y'
+
+targets:
+- qemu/x86_64
+- qemu/arm64
+- fc/x86_64
+- fc/arm64
+
+libraries:
+  wamr:
+    source: https://github.com/dblnz/lib-wamr.git
+    version: dev-new
+    kconfig:
+      - CONFIG_LIBWAMR_MAIN_FUNCTION=y
+  lwip:
+    source: https://github.com/dblnz/lib-lwip.git
+    version: staging
+  musl:
+    source: https://github.com/dblnz/lib-musl.git
+    version: wamr
